@@ -1,38 +1,28 @@
-import * as React from "react"
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+import * as React from "react";
+import { ChakraProvider, Container } from "@chakra-ui/react";
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+import theme from "./theme";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SidebarWithNavbar from "./component/SidebarWithNavbar";
+import Home from "./pages/Home";
+import Customers from "./pages/Customers";
+import Contracts from "./pages/Contracts";
+import Property from "./pages/Property";
+
+export const App = () => {
+  return (
+    <ChakraProvider theme={theme}>
+      <BrowserRouter>
+        <Container maxW="100%" h="100vh" bg="gray.200" p="0px 0px">
+          <SidebarWithNavbar>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/propiedades" element={<Property />} />
+              <Route path="/contratos" element={<Contracts />} />
+            </Routes>
+          </SidebarWithNavbar>
+        </Container>
+      </BrowserRouter>
+    </ChakraProvider>
+  );
+};
